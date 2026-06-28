@@ -5,6 +5,8 @@ const helmet = require("helmet");
 const rateLimit = require("express-rate-limit");
 const routeNotFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
+const { authRouter } = require("./routes/auth.route");
+const morgan = require("morgan");
 
 const app = express();
 
@@ -12,6 +14,7 @@ const port = process.env.PORT || 3000;
 
 //middleware
 app.use(express.json());
+app.use(morgan("dev"));
 
 //security middleware
 app.use(cors());
@@ -24,6 +27,7 @@ app.use(
 );
 
 //routes
+app.use("/api/v1/auth", authRouter);
 
 //error handling
 app.use(routeNotFound);
