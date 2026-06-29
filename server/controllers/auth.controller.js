@@ -1,4 +1,4 @@
-const { BadRequest, Conflict, UnAuthorized } = require("../errors");
+const { BadRequest, Conflict, UnAuthorized, NotFound } = require("../errors");
 const { prisma } = require("../db/prisma");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -78,4 +78,55 @@ const register = async (req, res) => {
     },
   });
 };
-module.exports = { login, register };
+
+const addCashier = async (req, res) => {
+  const { fullName, email, password } = req.body;
+  const { storeId } = req.user;
+  if (!fullName || !email || !password) {
+    throw new BadRequest();
+  }
+  let cashier = await prisma.user.findFirst({ where: { email } });
+  if (cashier) {
+    throw new Conflict();
+  }
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(password, salt);
+  cashier = await prisma.user.create({
+    data: { fullName, email, password: hash, role: "cashier", storeId },
+  });
+
+  res.status(201).json({
+    success: true,
+    message: "Cashier added successfully",
+    data: {
+      fullName,
+      email,
+      role: cashier.role,
+    },
+  });
+};
+
+const deleteCashier = async (req, res) => {
+  const { id } = req.params;
+  const { storeId } = req.user;
+  let cashier = await prisma.user.findFirst({
+    where: { id, storeId, role: "cashier" },
+  });
+  if (!cashier) {
+    throw new NotFound();
+  }
+  cashier = await prisma.user.delete({
+    where: { id, storeId, role: "cashier" },
+  });
+  res.status(200).json({
+    success: true,
+    message: "Cashier deleted successfully",
+    data: {
+      fullName: cashier.fullName,
+      email: cashier.email,
+      role: cashier.role,
+    },
+  });
+};
+
+module.exports = { login, register, addCashier, deleteCashier };
