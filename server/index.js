@@ -6,6 +6,7 @@ const rateLimit = require("express-rate-limit");
 const routeNotFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 const { authRouter } = require("./routes/auth.route");
+const { productRouter } = require("./routes/products.route");
 const morgan = require("morgan");
 
 const app = express();
@@ -28,6 +29,7 @@ app.use(
 
 //routes
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/products", productRouter);
 
 //error handling
 app.use(routeNotFound);
