@@ -61,10 +61,22 @@ const register = async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const store = await prisma.store.create({ data: { storeName } });
-  const user = await prisma.user.create({
-    data: { fullName, email, password: hash, storeId: store.id, role: "admin" },
+  const result = await prisma.$transaction(async (tx) => {
+    let store = await tx.store.findFirst({ where: { storeName } });
+    store = store ?? (await tx.store.create({ data: { storeName } }));
+    const user = await tx.user.create({
+      data: {
+        fullName,
+        email,
+        password: hash,
+        storeId: store.id,
+        role: "admin",
+      },
+    });
+
+    return { user, store };
   });
+  const { user, store } = result;
   const payload = { userId: user.id, storeId: store.id, role: user.role };
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_LIFETIME,
