@@ -7,6 +7,7 @@ const routeNotFound = require("./middleware/notFound");
 const errorHandler = require("./middleware/errorHandler");
 const { authRouter } = require("./routes/auth.route");
 const { productRouter } = require("./routes/products.route");
+const { salesRouter } = require("./routes/sales.route");
 const morgan = require("morgan");
 
 const app = express();
@@ -30,6 +31,7 @@ app.use(
 //routes
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/products", productRouter);
+app.use("/api/v1/sales", salesRouter);
 
 //error handling
 app.use(routeNotFound);
