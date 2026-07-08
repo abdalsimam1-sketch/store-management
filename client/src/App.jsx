@@ -1,30 +1,59 @@
 import { AuthPage } from "./pages/AuthPage";
 import { Route, Routes } from "react-router-dom";
 import { ProtectedRoutes } from "./components/ProtectedRoutes";
-import { CashierDashboard } from "./pages/CashierDashboard";
-import { AdminDashboard } from "./pages/AdminDashboard";
+import { CashierDashboard } from "./pages/cashier/CashierDashboard";
+import { AdminDashboard } from "./pages/admin/AdminDashboard";
+import AdminLayout from "./components/AdminLayout";
+import AdminSidebar from "./components/AdminSidebar";
+import { CashierLayout } from "./components/CashierLayout";
+import CashierSidebar from "./components/CashierSidebar";
+import Products from "./pages/admin/Products";
+import Cashiers from "./pages/admin/Cashiers";
+import Reports from "./pages/admin/Reports";
+import PageNotFound from "./pages/PageNotFound";
+import { Sales } from "./pages/cashier/Sales";
+import { Checkout } from "./pages/cashier/Checkout";
 
 const App = () => {
   return (
     <div>
       <Routes>
         <Route path="/" element={<AuthPage></AuthPage>}></Route>
+        <Route path="*" element={<PageNotFound></PageNotFound>}></Route>
+
+        {/* ADMIN ROUTES */}
+
         <Route
-          path="/admin"
           element={
             <ProtectedRoutes allowedRole="admin">
-              <AdminDashboard></AdminDashboard>
+              <AdminLayout></AdminLayout>
             </ProtectedRoutes>
           }
-        ></Route>
+        >
+          <Route
+            path="/admin"
+            element={<AdminDashboard></AdminDashboard>}
+          ></Route>
+          <Route path="/admin/products" element={<Products></Products>}></Route>
+          <Route path="/admin/cashiers" element={<Cashiers></Cashiers>}></Route>
+          <Route path="/admin/reports" element={<Reports></Reports>}></Route>
+        </Route>
+
+        {/* CASHIER ROUTES */}
+
         <Route
-          path="/cashier"
           element={
             <ProtectedRoutes allowedRole="cashier">
-              <CashierDashboard></CashierDashboard>
+              <CashierLayout></CashierLayout>
             </ProtectedRoutes>
           }
-        ></Route>
+        >
+          <Route path="/cashier/sales" element={<Sales></Sales>}></Route>
+          <Route
+            path="/cashier/checkout"
+            element={<Checkout></Checkout>}
+          ></Route>
+        </Route>
       </Routes>
     </div>
   );
