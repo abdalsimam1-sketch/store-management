@@ -48,6 +48,10 @@ const App = () => {
             </ProtectedRoutes>
           }
         >
+          <Route
+            path="/cashier"
+            element={<CashierDashboard></CashierDashboard>}
+          ></Route>
           <Route path="/cashier/sales" element={<Sales></Sales>}></Route>
           <Route
             path="/cashier/checkout"
