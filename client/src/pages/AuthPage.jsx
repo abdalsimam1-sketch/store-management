@@ -57,7 +57,7 @@ export const AuthPage = () => {
     }
   };
   return (
-    <main className="d-flex container">
+    <main className="d-flex">
       <div className="left  d-none d-lg-flex d-flex align-items-center p-3 text-light ">
         <h2 className="mx-auto text-center">
           {authMode === "login" && (
