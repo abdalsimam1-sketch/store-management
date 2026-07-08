@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { login, register } from "../services/auth.services";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const AUTH_MODE = {
   LOGIN: "login",
@@ -20,6 +21,7 @@ export const AuthPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { user, setUser } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,9 +39,11 @@ export const AuthPage = () => {
         } else {
           navigate("/cashier");
         }
+        setUser(response.data.user);
       } else {
         const response = await register(authForm);
         localStorage.setItem("token", response.data.token);
+        setUser(response.data.user);
         if (response.data.user.role === "admin") {
           navigate("/admin");
         } else {
