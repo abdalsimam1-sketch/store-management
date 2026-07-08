@@ -1,0 +1,39 @@
+:root {
+  --brown: #221c15;
+  --till: #e2a480;
+  --orange: #c2622d;
+  --font-display: "Fraunces", serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+html,
+body {
+  color: white;
+}
+main > div {
+  flex: 1;
+  height: 100vh;
+}
+.left {
+  background-color: var(--brown);
+}
+.till {
+  color: var(--till);
+}
+.card.auth-section {
+  max-width: 500px;
+  width: 95%;
+  height: auto;
+}
+.auth-btn.btn,
+.auth-btn.btn:hover {
+  background-color: var(--orange);
+  color: wheat;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+.auth-switch {
+  color: #c2622d;
+}
