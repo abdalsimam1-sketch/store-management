@@ -4,6 +4,25 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { loginSchema, registerSchema } = require("../utils/validations/index");
 
+const getUser = async (req, res) => {
+  const { userId } = req.user;
+  const user = await prisma.user.findFirst({ where: { id: userId } });
+  if (!user) {
+    throw new UnAuthorized();
+  }
+  res.status(200).json({
+    success: true,
+    message: "User Found",
+    data: {
+      user: {
+        id: user.id,
+        fullName: user.fullName,
+        email: user.email,
+        role: user.role,
+      },
+    },
+  });
+};
 const login = async (req, res) => {
   //get payload
   const { email, password } = req.body;
@@ -141,4 +160,4 @@ const deleteCashier = async (req, res) => {
   });
 };
 
-module.exports = { login, register, addCashier, deleteCashier };
+module.exports = { login, register, addCashier, deleteCashier, getUser };

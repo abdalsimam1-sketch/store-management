@@ -5,11 +5,13 @@ const {
   register,
   addCashier,
   deleteCashier,
+  getUser,
 } = require("../controllers/auth.controller");
 
 const { authMiddleware } = require("../middleware/auth.middleware");
 const { roleMiddleware } = require("../middleware/role.middleware");
 
+authRouter.get("", authMiddleware, getUser);
 authRouter.post("/login", login);
 
 authRouter.post("/register", register);
