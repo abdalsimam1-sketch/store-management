@@ -126,7 +126,10 @@ const Products = () => {
         <div>
           <AddEditProduct
             product={selectedProduct}
-            onClose={() => setModalOpen(false)}
+            onClose={() => {
+              setModalOpen(false);
+              setSelectedProduct(null);
+            }}
             refresh={() => getProducts()}
             mode={selectedProduct ? "edit" : "add"}
           ></AddEditProduct>
