@@ -3,10 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import { ProtectedRoutes } from "./components/ProtectedRoutes";
 import { CashierDashboard } from "./pages/cashier/CashierDashboard";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
-import AdminLayout from "./components/AdminLayout";
-import AdminSidebar from "./components/AdminSidebar";
-import { CashierLayout } from "./components/CashierLayout";
-import CashierSidebar from "./components/CashierSidebar";
+import AdminLayout from "./components/admin/AdminLayout";
+import { CashierLayout } from "./components/cashier/CashierLayout";
+
 import Products from "./pages/admin/Products";
 import Cashiers from "./pages/admin/Cashiers";
 import Reports from "./pages/admin/Reports";

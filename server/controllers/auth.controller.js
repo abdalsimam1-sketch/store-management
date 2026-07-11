@@ -5,8 +5,11 @@ const jwt = require("jsonwebtoken");
 const { loginSchema, registerSchema } = require("../utils/validations/index");
 
 const getUser = async (req, res) => {
-  const { userId } = req.user;
-  const user = await prisma.user.findFirst({ where: { id: userId } });
+  const { userId, storeId } = req.user;
+  const user = await prisma.user.findFirst({
+    where: { id: userId },
+    include: { store: true },
+  });
   if (!user) {
     throw new UnAuthorized();
   }
@@ -19,6 +22,7 @@ const getUser = async (req, res) => {
         fullName: user.fullName,
         email: user.email,
         role: user.role,
+        store: user.store,
       },
     },
   });

@@ -2,13 +2,18 @@
   --brown: #221c15;
   --till: #e2a480;
   --orange: #c2622d;
+  --bg-color: #f6f1e8;
+  --nav-links: #c2612d27;
   --font-display: "Fraunces", serif;
   --font-body: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
 html,
-body {
-  color: white;
+body,
+#root {
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  color: black;
 }
 main > div {
   flex: 1;
@@ -36,4 +41,23 @@ main > div {
 }
 .auth-switch {
   color: #c2622d;
+}
+.admin-sidebar {
+  max-width: 300px;
+  min-height: 100vh;
+}
+div > a {
+  color: black;
+}
+a.btn,
+a.btn:hover {
+  background-color: var(--nav-links);
+}
+.active-nav-link.btn {
+  border-color: #c2622d;
+  color: #c2622d;
+}
+.store-name {
+  color: var(--till);
+  text-decoration: underline;
 }
