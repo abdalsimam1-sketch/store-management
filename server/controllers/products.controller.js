@@ -66,7 +66,7 @@ const updateProduct = async (req, res) => {
       stockQuantity: Number(stockQuantity),
       category,
     },
-    where: { storeId, id },
+    where: { id },
   });
 
   res.status(200).json({
@@ -82,7 +82,7 @@ const deleteProduct = async (req, res) => {
   if (!product) {
     throw new NotFound();
   }
-  product = await prisma.product.delete({ where: { storeId, id } });
+  product = await prisma.product.delete({ where: { id } });
   res.status(200).json({
     success: true,
     message: "Product deleted successfully",

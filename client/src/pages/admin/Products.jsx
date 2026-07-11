@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchProducts } from "../../services/products.services";
+import { fetchProducts, deleteProduct } from "../../services/products.services";
 import { AddEditProduct } from "../../components/admin/AddEditProduct";
 import { CATEGORIES } from "../../data.js/categories";
 
@@ -11,13 +11,13 @@ const Products = () => {
   const [products, setProducts] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [deletingId, setDeletingId] = useState(null);
 
   const getProducts = async () => {
     try {
       setError("");
       setLoading(true);
       const data = await fetchProducts(search, category);
-      console.log(data.data.products);
       setProducts(data.data.products);
     } catch (error) {
       setError(error.response?.data?.products);
@@ -33,7 +33,22 @@ const Products = () => {
     e.preventDefault();
     getProducts();
   };
+  const handleDelete = async (id) => {
+    try {
+      setDeletingId(id);
+      await deleteProduct(id);
 
+      getProducts();
+    } catch (error) {
+      if (error.code === "P2003") {
+        throw new BadRequest(
+          "Cannot delete a product that has existing sales records.",
+        );
+      }
+    } finally {
+      setDeletingId(null);
+    }
+  };
   return (
     <div className="container py-4 d-flex flex-column gap-5">
       <header className="d-flex justify-content-between align-items-center">
@@ -114,7 +129,16 @@ const Products = () => {
                         setSelectedProduct(item);
                       }}
                     ></i>
-                    <i className="btn btn-outline-danger bi bi-trash"></i>
+                    {deletingId === item.id ? (
+                      <span className="spinner-border text-danger"></span>
+                    ) : (
+                      <i
+                        className="btn btn-outline-danger bi bi-trash"
+                        onClick={() => {
+                          handleDelete(item.id);
+                        }}
+                      ></i>
+                    )}
                   </span>
                 </td>
               </tr>

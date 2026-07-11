@@ -46,6 +46,7 @@ export const AddEditProduct = ({ mode, product, onClose, refresh }) => {
       setLoading(false);
     }
   };
+
   return (
     <div className="position-fixed top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center modal-container">
       <div className="p-4 product-modal card bg-light">
