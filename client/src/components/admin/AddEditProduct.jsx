@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CATEGORIES } from "../../data.js/categories";
-import { addProduct } from "../../services/products.services";
+import { addProduct, updateProduct } from "../../services/products.services";
 
 export const AddEditProduct = ({ mode, product, onClose, refresh }) => {
   const [productForm, setProductForm] = useState({
@@ -15,12 +15,26 @@ export const AddEditProduct = ({ mode, product, onClose, refresh }) => {
   const setField = (e, field) => {
     setProductForm((current) => ({ ...current, [field]: e.target.value }));
   };
+  useEffect(() => {
+    if (product) {
+      setProductForm({
+        productName: product.productName,
+        category: product.category,
+        price: product.price,
+        stockQuantity: product.stockQuantity,
+      });
+    }
+  }, [product]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
-      await addProduct(productForm);
+      if (mode === "add") {
+        await addProduct(productForm);
+      } else {
+        await updateProduct(product.id, productForm);
+      }
       setSuccess(true);
       setTimeout(() => {
         onClose();
@@ -37,12 +51,13 @@ export const AddEditProduct = ({ mode, product, onClose, refresh }) => {
       <div className="p-4 product-modal card bg-light">
         {success && (
           <div className="alert alert-success p-2">
-            <span>Product added successfully!</span>
+            {mode === "add" && <span>Product added successfully!</span>}
+            {mode === "edit" && <span>Product updated successfully!</span>}
           </div>
         )}
         <section className="d-flex justify-content-between align-items-center">
           <span>
-            {mode === "add" ? <h3>Add Product</h3> : <>Edit Product</>}
+            {mode === "add" ? <h3>Add Product</h3> : <h3>Edit Product</h3>}
           </span>
           <i
             className="bi bi-x-circle fs-4 cursor-pointer btn"

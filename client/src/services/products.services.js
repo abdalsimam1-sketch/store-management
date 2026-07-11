@@ -14,3 +14,8 @@ export const addProduct = async (payload) => {
   const response = await api.post("/products", payload);
   return response.data.data;
 };
+
+export const updateProduct = async (id, payload) => {
+  const response = await api.patch(`/products/${id}`, payload);
+  return response.data.data;
+};

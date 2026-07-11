@@ -60,7 +60,12 @@ const updateProduct = async (req, res) => {
     throw new NotFound();
   }
   product = await prisma.product.update({
-    data: { productName, price, stockQuantity, category },
+    data: {
+      productName,
+      price,
+      stockQuantity: Number(stockQuantity),
+      category,
+    },
     where: { storeId, id },
   });
 

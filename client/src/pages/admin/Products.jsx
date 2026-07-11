@@ -10,6 +10,7 @@ const Products = () => {
   const [error, setError] = useState("");
   const [products, setProducts] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const getProducts = async () => {
     try {
@@ -106,7 +107,13 @@ const Products = () => {
                 </td>
                 <td>
                   <span className="d-flex gap-3">
-                    <i className="btn btn-outline-dark bi bi-pencil-square"></i>
+                    <i
+                      className="btn btn-outline-dark bi bi-pencil-square"
+                      onClick={() => {
+                        setModalOpen(true);
+                        setSelectedProduct(item);
+                      }}
+                    ></i>
                     <i className="btn btn-outline-danger bi bi-trash"></i>
                   </span>
                 </td>
@@ -118,10 +125,10 @@ const Products = () => {
       {modalOpen && (
         <div>
           <AddEditProduct
-            mode="add"
-            product={undefined}
+            product={selectedProduct}
             onClose={() => setModalOpen(false)}
             refresh={() => getProducts()}
+            mode={selectedProduct ? "edit" : "add"}
           ></AddEditProduct>
         </div>
       )}
