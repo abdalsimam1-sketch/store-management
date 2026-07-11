@@ -61,3 +61,15 @@ a.btn:hover {
   color: var(--till);
   text-decoration: underline;
 }
+
+.add-btn.btn,
+.add-btn.btn:hover {
+  background-color: #c2622d;
+  color: white;
+}
+.form-control.form-input {
+  max-width: 20rem;
+}
+.form-select {
+  max-width: 10rem;
+}

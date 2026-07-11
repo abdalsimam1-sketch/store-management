@@ -5,7 +5,7 @@ const AdminSidebar = () => {
   const activeLink = (path) =>
     location.pathname === path ? "active-nav-link" : "";
   return (
-    <div className="admin-sidebar d-flex flex-column px-5 py-3 gap-5 border-end ">
+    <div className="admin-sidebar d-flex flex-column px-5 py-3 gap-5 border-end text-nowrap">
       <div className="logo">
         <h1>Till</h1>
       </div>

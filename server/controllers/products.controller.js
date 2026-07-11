@@ -37,7 +37,7 @@ const getProducts = async (req, res) => {
   const products = await prisma.product.findMany({
     where: {
       storeId,
-      category,
+      category: category || undefined,
       productName: {
         contains: search,
         mode: "insensitive",
