@@ -1,20 +1,15 @@
 import { useState, useEffect } from "react";
 import { fetchProducts } from "../../services/products.services";
-const CATEGORIES = [
-  "dairy",
-  "pantry",
-  "toiletries",
-  "beverages",
-  "cooking",
-  "seasoning",
-  "breakfast",
-];
+import { AddEditProduct } from "../../components/admin/AddEditProduct";
+import { CATEGORIES } from "../../data.js/categories";
+
 const Products = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [products, setProducts] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const getProducts = async () => {
     try {
@@ -37,6 +32,7 @@ const Products = () => {
     e.preventDefault();
     getProducts();
   };
+
   return (
     <div className="container py-4 d-flex flex-column gap-5">
       <header className="d-flex justify-content-between align-items-center">
@@ -45,7 +41,12 @@ const Products = () => {
           <span></span>
         </div>
         <div>
-          <button className="add-btn btn align-self-end">+ Add product</button>
+          <button
+            className="add-btn btn align-self-end"
+            onClick={() => setModalOpen(true)}
+          >
+            + Add product
+          </button>
         </div>
       </header>
 
@@ -61,7 +62,7 @@ const Products = () => {
         </form>
         <select
           value={category}
-          className="form-select text-capitalize"
+          className="form-select text-capitalize filter"
           onChange={(e) => setCategory(e.target.value)}
         >
           <option value="">All categories</option>
@@ -73,8 +74,11 @@ const Products = () => {
         </select>
       </section>
       <section>
-        <table className="table rounded" style={{ borderRadius: "1rem" }}>
-          <thead className="text-muted">
+        <table
+          className="table text-capitalize align-middle"
+          style={{ borderRadius: "1rem" }}
+        >
+          <thead className="text-muted ">
             <tr>
               <th>Product</th>
               <th>Category</th>
@@ -92,7 +96,7 @@ const Products = () => {
                     {item.category}
                   </span>
                 </td>
-                <td>₦{item.price}</td>
+                <td>₦{Number(item.price).toLocaleString()}</td>
                 <td>
                   <span
                     className={`${Number(item.stockQuantity) <= 10 ? "bg-danger-subtle text-danger" : "bg-success-subtle text-success"} border px-3 rounded-pill py-1`}
@@ -111,6 +115,16 @@ const Products = () => {
           </tbody>
         </table>
       </section>
+      {modalOpen && (
+        <div>
+          <AddEditProduct
+            mode="add"
+            product={undefined}
+            onClose={() => setModalOpen(false)}
+            refresh={() => getProducts()}
+          ></AddEditProduct>
+        </div>
+      )}
     </div>
   );
 };

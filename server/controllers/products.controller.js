@@ -18,7 +18,7 @@ const addProduct = async (req, res) => {
     data: {
       productName,
       price,
-      stockQuantity,
+      stockQuantity: Number(stockQuantity),
       category,
       storeId,
       adminId: userId,

@@ -70,6 +70,23 @@ a.btn:hover {
 .form-control.form-input {
   max-width: 20rem;
 }
-.form-select {
-  max-width: 10rem;
+.form-select.filter {
+  max-width: 12rem;
+}
+.modal-container {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.card.product-modal {
+  max-width: 500px;
+  width: 95%;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cancel-btn.btn,
+.cancel-btn.btn:hover {
+  background-color: var(--nav-links);
+  border-color: #c2622d;
+  color: #c2622d;
 }
