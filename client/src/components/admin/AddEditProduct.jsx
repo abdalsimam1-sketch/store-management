@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { CATEGORIES } from "../../data.js/categories";
 import { addProduct, updateProduct } from "../../services/products.services";
+import { setField } from "../../utils/setFormField";
 
 export const AddEditProduct = ({ mode, product, onClose, refresh }) => {
   const [productForm, setProductForm] = useState({
@@ -12,9 +13,7 @@ export const AddEditProduct = ({ mode, product, onClose, refresh }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const setField = (e, field) => {
-    setProductForm((current) => ({ ...current, [field]: e.target.value }));
-  };
+
   useEffect(() => {
     if (product) {
       setProductForm({
@@ -74,7 +73,7 @@ export const AddEditProduct = ({ mode, product, onClose, refresh }) => {
               className="form-control"
               id="product-name"
               value={productForm.productName}
-              onChange={(e) => setField(e, "productName")}
+              onChange={(e) => setField(e, "productName", setProductForm)}
             />
           </div>
           <div>
@@ -83,7 +82,7 @@ export const AddEditProduct = ({ mode, product, onClose, refresh }) => {
               id="category"
               className="form-select w-100 text-capitalize"
               value={productForm.category}
-              onChange={(e) => setField(e, "category")}
+              onChange={(e) => setField(e, "category", setProductForm)}
             >
               <option value="">Choose Category</option>
               {CATEGORIES.map((item) => (
@@ -101,7 +100,7 @@ export const AddEditProduct = ({ mode, product, onClose, refresh }) => {
                 id="price"
                 className="form-control"
                 value={productForm.price}
-                onChange={(e) => setField(e, "price")}
+                onChange={(e) => setField(e, "price", setProductForm)}
               />
             </div>
             <div>
@@ -111,7 +110,7 @@ export const AddEditProduct = ({ mode, product, onClose, refresh }) => {
                 id="stock"
                 className="form-control"
                 value={productForm.stockQuantity}
-                onChange={(e) => setField(e, "stockQuantity")}
+                onChange={(e) => setField(e, "stockQuantity", setProductForm)}
               />
             </div>
           </section>
