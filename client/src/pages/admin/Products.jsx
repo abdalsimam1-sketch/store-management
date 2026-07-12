@@ -34,10 +34,12 @@ const Products = () => {
     getProducts();
   };
   const handleDelete = async (id) => {
+    if (!window.confirm("Delete this product")) {
+      return;
+    }
     try {
       setDeletingId(id);
       await deleteProduct(id);
-
       getProducts();
     } catch (error) {
       if (error.code === "P2003") {
@@ -104,45 +106,53 @@ const Products = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((item) => (
-              <tr key={item.id}>
-                <td>{item.productName}</td>
-                <td className="text-capitalize ">
-                  <span className="border px-3 py-1 rounded-pill bg-dark-subtle">
-                    {item.category}
-                  </span>
-                </td>
-                <td>₦{Number(item.price).toLocaleString()}</td>
-                <td>
-                  <span
-                    className={`${Number(item.stockQuantity) <= 10 ? "bg-danger-subtle text-danger" : "bg-success-subtle text-success"} border px-3 rounded-pill py-1`}
-                  >
-                    {item.stockQuantity} left
-                  </span>
-                </td>
-                <td>
-                  <span className="d-flex gap-3">
-                    <i
-                      className="btn btn-outline-dark bi bi-pencil-square"
-                      onClick={() => {
-                        setModalOpen(true);
-                        setSelectedProduct(item);
-                      }}
-                    ></i>
-                    {deletingId === item.id ? (
-                      <span className="spinner-border text-danger"></span>
-                    ) : (
-                      <i
-                        className="btn btn-outline-danger bi bi-trash"
-                        onClick={() => {
-                          handleDelete(item.id);
-                        }}
-                      ></i>
-                    )}
-                  </span>
+            {loading ? (
+              <tr className="text-center py-5">
+                <td colSpan={5}>
+                  <span className="spinner-border"></span>
                 </td>
               </tr>
-            ))}
+            ) : (
+              products.map((item) => (
+                <tr key={item.id}>
+                  <td>{item.productName}</td>
+                  <td className="text-capitalize ">
+                    <span className="border px-3 py-1 rounded-pill bg-dark-subtle">
+                      {item.category}
+                    </span>
+                  </td>
+                  <td>₦{Number(item.price).toLocaleString()}</td>
+                  <td>
+                    <span
+                      className={`${Number(item.stockQuantity) <= 10 ? "bg-danger-subtle text-danger" : "bg-success-subtle text-success"} border px-3 rounded-pill py-1`}
+                    >
+                      {item.stockQuantity} left
+                    </span>
+                  </td>
+                  <td>
+                    <span className="d-flex gap-3">
+                      <i
+                        className="btn btn-outline-dark bi bi-pencil-square"
+                        onClick={() => {
+                          setModalOpen(true);
+                          setSelectedProduct(item);
+                        }}
+                      ></i>
+                      {deletingId === item.id ? (
+                        <span className="spinner-border text-danger"></span>
+                      ) : (
+                        <i
+                          className="btn btn-outline-danger bi bi-trash"
+                          onClick={() => {
+                            handleDelete(item.id);
+                          }}
+                        ></i>
+                      )}
+                    </span>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </section>
