@@ -90,3 +90,7 @@ a.btn:hover {
   border-color: #c2622d;
   color: #c2622d;
 }
+.sale-items {
+  padding-left: 12rem;
+  padding-right: 12rem;
+}

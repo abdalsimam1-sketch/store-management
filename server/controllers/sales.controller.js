@@ -50,7 +50,7 @@ const getStoreSales = async (req, res) => {
   const { storeId } = req.user;
   const sales = await prisma.sale.findMany({
     where: { storeId },
-    include: { items: { include: { product: true } } },
+    include: { items: { include: { product: true } }, cashier: true },
   });
   res.status(200).json({ success: true, message: "Sales Found", data: sales });
 };
