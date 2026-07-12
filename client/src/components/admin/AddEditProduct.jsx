@@ -74,6 +74,7 @@ export const AddEditProduct = ({ mode, product, onClose, refresh }) => {
               id="product-name"
               value={productForm.productName}
               onChange={(e) => setField(e, "productName", setProductForm)}
+              placeholder="Indomie Noodles (Carton)......"
             />
           </div>
           <div>
@@ -101,6 +102,7 @@ export const AddEditProduct = ({ mode, product, onClose, refresh }) => {
                 className="form-control"
                 value={productForm.price}
                 onChange={(e) => setField(e, "price", setProductForm)}
+                placeholder="₦1,000...."
               />
             </div>
             <div>
@@ -111,6 +113,7 @@ export const AddEditProduct = ({ mode, product, onClose, refresh }) => {
                 className="form-control"
                 value={productForm.stockQuantity}
                 onChange={(e) => setField(e, "stockQuantity", setProductForm)}
+                placeholder="50...."
               />
             </div>
           </section>
