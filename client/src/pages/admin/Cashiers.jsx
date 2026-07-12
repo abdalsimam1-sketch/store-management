@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchCashiers } from "../../services/auth.services";
+import { fetchCashiers, deleteCashier } from "../../services/auth.services";
 import { AddCashier } from "../../components/admin/AddCashier";
 import { shortDate } from "../../utils/formatDate";
 
@@ -8,6 +8,7 @@ const Cashiers = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+  const [deletingId, setDeletingId] = useState(null);
 
   const getCashiers = async () => {
     try {
@@ -19,6 +20,18 @@ const Cashiers = () => {
       setError(error.response?.data?.message);
     } finally {
       setLoading(false);
+    }
+  };
+  const handleDelete = async (id) => {
+    if (!window.confirm("Delete this cashier?")) return;
+    try {
+      setDeletingId(id);
+      await deleteCashier(id);
+      getCashiers();
+    } catch (error) {
+      setError(error.response?.data?.message);
+    } finally {
+      setDeletingId(null);
     }
   };
   useEffect(() => {
@@ -61,7 +74,14 @@ const Cashiers = () => {
                   <td>{item.email}</td>
                   <td>{shortDate(item.createdAt)}</td>
                   <td>
-                    <i className="bi bi-trash btn btn-outline-danger"></i>
+                    {deletingId === item.id ? (
+                      <span className="spinner-border text-danger"></span>
+                    ) : (
+                      <i
+                        className="bi bi-trash btn btn-outline-danger"
+                        onClick={() => handleDelete(item.id)}
+                      ></i>
+                    )}
                   </td>
                 </tr>
               ))

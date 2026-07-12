@@ -25,3 +25,7 @@ export const registerCashier = async (payload) => {
   const response = await api.post("/auth/add-cashier", payload);
   return response.data.data;
 };
+export const deleteCashier = async (id) => {
+  const response = await api.delete(`/auth/${id}`);
+  return response.data.data;
+};
