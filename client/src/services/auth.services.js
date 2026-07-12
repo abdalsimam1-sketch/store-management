@@ -17,3 +17,7 @@ export const getUser = async () => {
 export const logout = async () => {
   localStorage.removeItem("token");
 };
+export const fetchCashiers = async () => {
+  const response = await api.get("/auth/cashiers");
+  return response.data.data;
+};

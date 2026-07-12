@@ -164,4 +164,30 @@ const deleteCashier = async (req, res) => {
   });
 };
 
-module.exports = { login, register, addCashier, deleteCashier, getUser };
+const getCashiers = async (req, res) => {
+  const { storeId } = req.user;
+  const cashiers = await prisma.user.findMany({
+    where: { role: "cashier", storeId },
+  });
+  const formattedCashiers = cashiers.map((cashier) => ({
+    fullName: cashier.fullName,
+    email: cashier.email,
+    role: cashier.role,
+    createdAt: cashier.createdAt,
+    id: cashier.id,
+  }));
+  res.status(200).json({
+    success: true,
+    message: "Cashiers found",
+    data: formattedCashiers,
+  });
+};
+
+module.exports = {
+  login,
+  register,
+  addCashier,
+  deleteCashier,
+  getUser,
+  getCashiers,
+};
