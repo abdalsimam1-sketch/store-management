@@ -49,7 +49,7 @@ const Reports = () => {
             {loading ? (
               <tr>
                 <td colSpan={5} className="text-center">
-                  <span className="spinner-border"></span>
+                  <span className="spinner-border my-5"></span>
                 </td>
               </tr>
             ) : (

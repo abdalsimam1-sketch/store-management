@@ -63,8 +63,8 @@ const Cashiers = () => {
           <tbody className="align-middle">
             {loading ? (
               <tr>
-                <td colSpan={4} className="text-center py-4">
-                  <span className="spinner-border"></span>
+                <td colSpan={4} className="text-center">
+                  <span className="spinner-border my-5"></span>
                 </td>
               </tr>
             ) : (

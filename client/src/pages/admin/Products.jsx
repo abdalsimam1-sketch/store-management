@@ -109,7 +109,7 @@ const Products = () => {
             {loading ? (
               <tr className="text-center py-5">
                 <td colSpan={5}>
-                  <span className="spinner-border"></span>
+                  <span className="spinner-border my-5"></span>
                 </td>
               </tr>
             ) : (
