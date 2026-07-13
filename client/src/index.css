@@ -114,3 +114,14 @@ a.btn:hover {
 .cart-icon {
   color: #c2622d;
 }
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  background-color: #c2622d;
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 1024px) {
+}

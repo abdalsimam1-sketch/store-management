@@ -26,7 +26,7 @@ export const AdminDashboard = () => {
     getDashboard();
   }, []);
   return (
-    <div className=" container h-100">
+    <div className=" container h-100 pb-5 pb-md-0">
       {loading ? (
         <div className="d-flex justify-content-center align-items-center h-100">
           <span
@@ -35,7 +35,7 @@ export const AdminDashboard = () => {
           ></span>
         </div>
       ) : (
-        <div className="py-4 px-5  d-flex flex-column gap-4">
+        <div className="py-4  px-md-3 d-flex flex-column gap-4">
           <section>
             {user && <h2>Good day, {user.fullName}</h2>}
             <span className="fw-bold">
@@ -45,7 +45,7 @@ export const AdminDashboard = () => {
             </span>
           </section>
           <section className="row g-3">
-            <div className="col-md-4">
+            <div className="col-lg-4">
               <AdminStats
                 icon="cash text-success"
                 amount={Number(
@@ -55,14 +55,14 @@ export const AdminDashboard = () => {
                 symbol="₦"
               ></AdminStats>
             </div>
-            <div className="col-md-4">
+            <div className="col-lg-4">
               <AdminStats
                 icon="cart cart-icon"
                 amount={dashBoard.todaySales?._count}
                 title="Transactions today"
               ></AdminStats>
             </div>
-            <div className="col-md-4">
+            <div className="col-lg-4">
               <AdminStats
                 icon="exclamation-triangle text-warning"
                 amount={dashBoard.lowStocksCount}
@@ -72,7 +72,7 @@ export const AdminDashboard = () => {
           </section>
 
           <section className="row align-items-md-stretch g-4 g-md-3">
-            <div className="recent-sales col-12 col-md-6 col-lg-8 ">
+            <div className="recent-sales col-12  col-lg-8 ">
               <div className="card p-3 d-flex flex-column gap-3 h-100 list-card">
                 <section className="d-flex justify-content-between border-bottom py-2">
                   <h5>Recent Sales</h5>
@@ -106,7 +106,7 @@ export const AdminDashboard = () => {
                 </section>
               </div>
             </div>
-            <div className="low-stocks col-12 col-md-6 col-lg-4 ">
+            <div className="low-stocks col-12 col-lg-4 ">
               <div className="card p-3 d-flex flex-column gap-3 h-100 list-card">
                 <section className="d-flex justify-content-between border-bottom py-2">
                   {" "}
