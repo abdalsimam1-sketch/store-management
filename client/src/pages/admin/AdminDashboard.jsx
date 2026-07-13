@@ -126,7 +126,7 @@ export const AdminDashboard = () => {
                         <span className="text-muted">{item.category}</span>
                       </div>
                       <div>
-                        <span className="text-nowrap border border-danger rounded-pill px-2 bg-danger-subtle">
+                        <span className="text-nowrap border border-danger rounded-pill px-2 bg-danger-subtle text-danger">
                           {item.stockQuantity} left
                         </span>
                       </div>
