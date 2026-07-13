@@ -5,12 +5,6 @@ const getAdminDash = async (req, res) => {
   const { storeId } = req.user;
   const { startOfToday, startOfTommorow } = getDayRange();
 
-  //todays sales,
-
-  //low stock
-
-  //recent sales,
-
   const [todaySales, lowStocks, lowStocksCount, recentSales] =
     await Promise.all([
       prisma.sale.aggregate({
@@ -36,7 +30,10 @@ const getAdminDash = async (req, res) => {
         where: { storeId },
         orderBy: { createdAt: "desc" },
         take: 5,
-        include: { cashier: { select: { fullName: true } } },
+        include: {
+          cashier: { select: { fullName: true } },
+          items: true,
+        },
       }),
     ]);
   res.status(200).json({

@@ -49,6 +49,13 @@ main > div {
 div > a {
   color: black;
 }
+
+a.dash-link {
+  text-decoration: none;
+  color: #c2622d;
+  font-weight: bold;
+}
+
 a.btn,
 a.btn:hover {
   background-color: var(--nav-links);
@@ -93,4 +100,17 @@ a.btn:hover {
 .sale-items {
   padding-left: 12rem;
   padding-right: 12rem;
+}
+
+.list-card {
+  min-height: 40vh;
+}
+.person-icon.bi.bi-person {
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+}
+.amount,
+.cart-icon {
+  color: #c2622d;
 }
