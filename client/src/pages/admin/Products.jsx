@@ -68,7 +68,7 @@ const Products = () => {
         </div>
       </header>
 
-      <section className="d-flex justify-content-between">
+      <section className="d-flex  gap-3 justify-content-md-between">
         <form className="w-100" onSubmit={handleSubmit}>
           <input
             value={search}
@@ -80,7 +80,7 @@ const Products = () => {
         </form>
         <select
           value={category}
-          className="form-select text-capitalize filter"
+          className="form-select text-capitalize filter w-100"
           onChange={(e) => setCategory(e.target.value)}
         >
           <option value="">All categories</option>
@@ -99,8 +99,8 @@ const Products = () => {
           <thead className="text-muted ">
             <tr>
               <th>Product</th>
-              <th>Category</th>
-              <th>Price</th>
+              <th className="d-none d-md-table-cell">Category</th>
+              <th className="d-none d-md-table-cell">Price</th>
               <th>In Stock</th>
               <th>Actions</th>
             </tr>
@@ -116,12 +116,14 @@ const Products = () => {
               products.map((item) => (
                 <tr key={item.id}>
                   <td>{item.productName}</td>
-                  <td className="text-capitalize ">
+                  <td className="text-capitalize  d-none d-md-table-cell">
                     <span className="border px-3 py-1 rounded-pill bg-dark-subtle">
                       {item.category}
                     </span>
                   </td>
-                  <td>₦{Number(item.price).toLocaleString()}</td>
+                  <td className="d-none d-md-table-cell">
+                    ₦{Number(item.price).toLocaleString()}
+                  </td>
                   <td>
                     <span
                       className={`${Number(item.stockQuantity) <= 10 ? "bg-danger-subtle text-danger" : "bg-success-subtle text-success"} border px-3 rounded-pill py-1`}
