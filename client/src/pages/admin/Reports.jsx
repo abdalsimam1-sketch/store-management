@@ -61,7 +61,7 @@ const Reports = () => {
                         className={`bi bi-chevron-${expandedSaleId === null ? "up" : "down"} btn`}
                         onClick={() => {
                           setExpandedId(
-                            expandedSaleId === null ? sale.id : null,
+                            expandedSaleId === sale.id ? null : sale.id,
                           );
                         }}
                       ></i>

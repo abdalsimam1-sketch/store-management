@@ -98,8 +98,8 @@ a.btn:hover {
   color: #c2622d;
 }
 .sale-items {
-  padding-left: 12rem;
-  padding-right: 12rem;
+  padding-left: 4rem;
+  padding-right: 2rem;
 }
 
 .list-card {
@@ -124,4 +124,8 @@ a.btn:hover {
 }
 
 @media (min-width: 1024px) {
+  .sale-items {
+    padding-left: 12rem;
+    padding-right: 12rem;
+  }
 }

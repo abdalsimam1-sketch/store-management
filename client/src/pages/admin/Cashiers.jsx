@@ -55,7 +55,7 @@ const Cashiers = () => {
           <thead className="text-muted">
             <tr>
               <th>Name</th>
-              <th>Email</th>
+              <th className="d-none d-md-table-cell">Email</th>
               <th>Date Added</th>
               <th>Actions</th>
             </tr>
@@ -71,7 +71,7 @@ const Cashiers = () => {
               cashiers.map((item) => (
                 <tr key={item.id}>
                   <td>{item.fullName}</td>
-                  <td>{item.email}</td>
+                  <td className="d-none d-md-table-cell">{item.email}</td>
                   <td>{shortDate(item.createdAt)}</td>
                   <td>
                     {deletingId === item.id ? (
