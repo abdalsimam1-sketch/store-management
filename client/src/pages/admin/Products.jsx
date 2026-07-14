@@ -91,7 +91,7 @@ const Products = () => {
           ))}
         </select>
       </section>
-      <section className="data-table ">
+      <section className="data-table  text-nowrap">
         <table
           className="table text-capitalize align-middle flex-grow-1"
           style={{ borderRadius: "1rem" }}
@@ -128,7 +128,7 @@ const Products = () => {
                     <span
                       className={`${Number(item.stockQuantity) <= 10 ? "bg-danger-subtle text-danger" : "bg-success-subtle text-success"} border px-3 rounded-pill py-1`}
                     >
-                      {item.stockQuantity} left
+                      {item.stockQuantity}
                     </span>
                   </td>
                   <td>
