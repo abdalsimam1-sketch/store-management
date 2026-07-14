@@ -91,7 +91,7 @@ const Products = () => {
           ))}
         </select>
       </section>
-      <section className="data-table ">
+      <section className="data-table  text-nowrap">
         <table
           className="table text-capitalize align-middle flex-grow-1"
           style={{ borderRadius: "1rem" }}
