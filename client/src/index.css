@@ -119,6 +119,9 @@ a.btn:hover {
   bottom: 0;
   background-color: #c2622d;
 }
+a.active-mobile-nav {
+  color: white;
+}
 .data-table {
   min-height: 70vh;
   background-color: white;
