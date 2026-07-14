@@ -50,8 +50,8 @@ const Cashiers = () => {
         </button>
       </section>
 
-      <section>
-        <table className="table">
+      <section className="data-table">
+        <table className="table flex-grow-1 ">
           <thead className="text-muted">
             <tr>
               <th>Name</th>

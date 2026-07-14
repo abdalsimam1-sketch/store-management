@@ -16,7 +16,6 @@ export const AdminDashboard = () => {
       setError("");
       setLoading(true);
       const response = await fetchAdminDash();
-      console.log(response.data);
       setDashBoard(response.data);
     } finally {
       setLoading(false);
@@ -28,7 +27,7 @@ export const AdminDashboard = () => {
   return (
     <div className=" container h-100 pb-5 pb-md-0">
       {loading ? (
-        <div className="d-flex justify-content-center align-items-center h-100">
+        <div className="d-flex justify-content-center align-items-center min-vh-100">
           <span
             className="spinner-border"
             style={{ width: "5rem", height: "5rem" }}

@@ -34,7 +34,7 @@ const Reports = () => {
           <i className="bi bi-download"></i> Export CSV
         </button>
       </header>
-      <section>
+      <section className="data-table">
         <table className="table">
           <thead>
             <tr>

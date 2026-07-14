@@ -119,6 +119,12 @@ a.btn:hover {
   bottom: 0;
   background-color: #c2622d;
 }
+.data-table {
+  min-height: 70vh;
+  background-color: white;
+  border-radius: 1rem;
+  overflow: hidden;
+}
 
 @media (min-width: 768px) {
 }
