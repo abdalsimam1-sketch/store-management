@@ -91,7 +91,7 @@ const Products = () => {
           ))}
         </select>
       </section>
-      <section className="data-table">
+      <section className="data-table ">
         <table
           className="table text-capitalize align-middle flex-grow-1"
           style={{ borderRadius: "1rem" }}
@@ -102,7 +102,7 @@ const Products = () => {
               <th className="d-none d-md-table-cell">Category</th>
               <th className="d-none d-md-table-cell">Price</th>
               <th>In Stock</th>
-              <th>Actions</th>
+              <th className="actions-col">Actions</th>
             </tr>
           </thead>
           <tbody>

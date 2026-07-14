@@ -51,13 +51,13 @@ const Cashiers = () => {
       </section>
 
       <section className="data-table">
-        <table className="table flex-grow-1 ">
-          <thead className="text-muted">
+        <table className="table">
+          <thead className="text-muted ">
             <tr>
               <th>Name</th>
               <th className="d-none d-md-table-cell">Email</th>
               <th>Date Added</th>
-              <th>Actions</th>
+              <th className="actions-col"> Actions</th>
             </tr>
           </thead>
           <tbody className="align-middle">
@@ -78,7 +78,7 @@ const Cashiers = () => {
                       <span className="spinner-border text-danger"></span>
                     ) : (
                       <i
-                        className="bi bi-trash btn btn-outline-danger"
+                        className="bi bi-trash btn btn-outline-danger "
                         onClick={() => handleDelete(item.id)}
                       ></i>
                     )}

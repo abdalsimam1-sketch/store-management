@@ -125,6 +125,10 @@ a.btn:hover {
   border-radius: 1rem;
   overflow: hidden;
 }
+.actions-col {
+  width: 1%;
+  white-space: nowrap;
+}
 
 @media (min-width: 768px) {
 }
