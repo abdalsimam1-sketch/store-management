@@ -17,3 +17,15 @@ export const getUser = async () => {
 export const logout = async () => {
   localStorage.removeItem("token");
 };
+export const fetchCashiers = async () => {
+  const response = await api.get("/auth/cashiers");
+  return response.data.data;
+};
+export const registerCashier = async (payload) => {
+  const response = await api.post("/auth/add-cashier", payload);
+  return response.data.data;
+};
+export const deleteCashier = async (id) => {
+  const response = await api.delete(`/auth/${id}`);
+  return response.data.data;
+};

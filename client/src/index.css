@@ -2,13 +2,18 @@
   --brown: #221c15;
   --till: #e2a480;
   --orange: #c2622d;
+  --bg-color: #f6f1e8;
+  --nav-links: #c2612d27;
   --font-display: "Fraunces", serif;
   --font-body: "Inter", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
 html,
-body {
-  color: white;
+body,
+#root {
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  color: black;
 }
 main > div {
   flex: 1;
@@ -36,4 +41,104 @@ main > div {
 }
 .auth-switch {
   color: #c2622d;
+}
+.admin-sidebar {
+  max-width: 300px;
+  min-height: 100vh;
+}
+div > a {
+  color: black;
+}
+
+a.dash-link {
+  text-decoration: none;
+  color: #c2622d;
+  font-weight: bold;
+}
+
+a.btn,
+a.btn:hover {
+  background-color: var(--nav-links);
+}
+.active-nav-link.btn {
+  border-color: #c2622d;
+  color: #c2622d;
+}
+.store-name {
+  color: var(--till);
+  text-decoration: underline;
+}
+
+.add-btn.btn,
+.add-btn.btn:hover {
+  background-color: #c2622d;
+  color: white;
+}
+.form-control.form-input {
+  max-width: 20rem;
+}
+.form-select.filter {
+  max-width: 12rem;
+}
+.modal-container {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.card.product-modal {
+  max-width: 500px;
+  width: 95%;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cancel-btn.btn,
+.cancel-btn.btn:hover {
+  background-color: var(--nav-links);
+  border-color: #c2622d;
+  color: #c2622d;
+}
+.sale-items {
+  padding-left: 4rem;
+  padding-right: 2rem;
+}
+
+.list-card {
+  min-height: 40vh;
+}
+.person-icon.bi.bi-person {
+  border-radius: 50%;
+  height: 3rem;
+  width: 3rem;
+}
+.amount,
+.cart-icon {
+  color: #c2622d;
+}
+.mobile-nav {
+  position: fixed;
+  bottom: 0;
+  background-color: #c2622d;
+}
+a.active-mobile-nav {
+  color: white;
+}
+.data-table {
+  min-height: 70vh;
+  background-color: white;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.actions-col {
+  width: 1%;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 1024px) {
+  .sale-items {
+    padding-left: 12rem;
+    padding-right: 12rem;
+  }
 }

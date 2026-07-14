@@ -5,8 +5,11 @@ const jwt = require("jsonwebtoken");
 const { loginSchema, registerSchema } = require("../utils/validations/index");
 
 const getUser = async (req, res) => {
-  const { userId } = req.user;
-  const user = await prisma.user.findFirst({ where: { id: userId } });
+  const { userId, storeId } = req.user;
+  const user = await prisma.user.findFirst({
+    where: { id: userId },
+    include: { store: true },
+  });
   if (!user) {
     throw new UnAuthorized();
   }
@@ -19,6 +22,7 @@ const getUser = async (req, res) => {
         fullName: user.fullName,
         email: user.email,
         role: user.role,
+        store: user.store,
       },
     },
   });
@@ -160,4 +164,30 @@ const deleteCashier = async (req, res) => {
   });
 };
 
-module.exports = { login, register, addCashier, deleteCashier, getUser };
+const getCashiers = async (req, res) => {
+  const { storeId } = req.user;
+  const cashiers = await prisma.user.findMany({
+    where: { role: "cashier", storeId },
+  });
+  const formattedCashiers = cashiers.map((cashier) => ({
+    fullName: cashier.fullName,
+    email: cashier.email,
+    role: cashier.role,
+    createdAt: cashier.createdAt,
+    id: cashier.id,
+  }));
+  res.status(200).json({
+    success: true,
+    message: "Cashiers found",
+    data: formattedCashiers,
+  });
+};
+
+module.exports = {
+  login,
+  register,
+  addCashier,
+  deleteCashier,
+  getUser,
+  getCashiers,
+};

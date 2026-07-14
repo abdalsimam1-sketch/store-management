@@ -7,7 +7,6 @@ export const AuthProvider = ({ children }) => {
   const token = localStorage.getItem("token");
   const fetchUser = async () => {
     const response = await getUser();
-    console.log(response);
     setUser(response.data.user);
   };
   const signOut = async () => {

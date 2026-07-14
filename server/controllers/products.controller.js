@@ -18,7 +18,7 @@ const addProduct = async (req, res) => {
     data: {
       productName,
       price,
-      stockQuantity,
+      stockQuantity: Number(stockQuantity),
       category,
       storeId,
       adminId: userId,
@@ -37,7 +37,7 @@ const getProducts = async (req, res) => {
   const products = await prisma.product.findMany({
     where: {
       storeId,
-      category,
+      category: category || undefined,
       productName: {
         contains: search,
         mode: "insensitive",
@@ -60,8 +60,13 @@ const updateProduct = async (req, res) => {
     throw new NotFound();
   }
   product = await prisma.product.update({
-    data: { productName, price, stockQuantity, category },
-    where: { storeId, id },
+    data: {
+      productName,
+      price,
+      stockQuantity: Number(stockQuantity),
+      category,
+    },
+    where: { id },
   });
 
   res.status(200).json({
@@ -77,7 +82,7 @@ const deleteProduct = async (req, res) => {
   if (!product) {
     throw new NotFound();
   }
-  product = await prisma.product.delete({ where: { storeId, id } });
+  product = await prisma.product.delete({ where: { id } });
   res.status(200).json({
     success: true,
     message: "Product deleted successfully",
