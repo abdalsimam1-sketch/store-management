@@ -35,7 +35,10 @@ const login = async (req, res) => {
   if (error) {
     throw new BadRequest(error.details[0].message);
   }
-  const user = await prisma.user.findUnique({ where: { email } });
+  const user = await prisma.user.findUnique({
+    where: { email },
+    include: { store: { select: { storeName: true } } },
+  });
   if (!user) {
     throw new UnAuthorized();
   }
@@ -58,6 +61,7 @@ const login = async (req, res) => {
         fullName: user.fullName,
         email: user.email,
         role: user.role,
+        store: user.store,
       },
     },
   });
@@ -109,7 +113,13 @@ const register = async (req, res) => {
     data: {
       message: "User Created Successfully",
       token,
-      user: { id: user.id, fullName, email, role: user.role },
+      user: {
+        id: user.id,
+        fullName,
+        email,
+        role: user.role,
+        store: { storeName: store.storeName },
+      },
     },
   });
 };
