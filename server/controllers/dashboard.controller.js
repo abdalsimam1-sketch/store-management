@@ -47,6 +47,26 @@ const getAdminDash = async (req, res) => {
     },
   });
 };
-const getCashierDash = async (req, res) => {};
+const getCashierDash = async (req, res) => {
+  const { userId, storeId } = req.user;
+  const { startOfToday, startOfTommorow } = getDayRange();
+  const stats = await prisma.sale.aggregate({
+    where: {
+      cashierId: userId,
+      storeId,
+      createdAt: { gte: startOfToday, lt: startOfTommorow },
+    },
+    _sum: { total: true },
+    _avg: { total: true },
+    _count: true,
+  });
+  res.status(200).json({
+    success: true,
+    message: "Cashier Dashboard",
+    data: {
+      stats,
+    },
+  });
+};
 
 module.exports = { getAdminDash, getCashierDash };

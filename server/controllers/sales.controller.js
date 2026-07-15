@@ -59,6 +59,7 @@ const getCashierSales = async (req, res) => {
   const sales = await prisma.sale.findMany({
     where: { cashierId: userId, storeId },
     include: { items: { include: { product: true } } },
+    orderBy: { createdAt: "desc" },
   });
   res.status(200).json({ success: true, message: "Sales found", data: sales });
 };
