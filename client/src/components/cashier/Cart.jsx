@@ -1,7 +1,17 @@
 import { useCart } from "../../hooks/useCart";
 
-export const Cart = ({ cart, clear, increase, decrease, remove }) => {
+export const Cart = ({
+  cart,
+  clear,
+  increase,
+  decrease,
+  remove,
+  onCheckout,
+  loading,
+  success,
+}) => {
   const { total } = useCart();
+
   return (
     <div className="card position-absolute p-3 cart z-3 d-flex flex-column gap-3">
       <section className="d-flex justify-content-between align-items-center border-bottom">
@@ -74,8 +84,21 @@ export const Cart = ({ cart, clear, increase, decrease, remove }) => {
           <h4>₦{Number(total(cart)).toLocaleString()}</h4>
         </div>
       </section>
-      <section>
-        <button className=" btn add-btn w-100 mb-4">Submit</button>
+      <section className="w-100">
+        <button
+          className=" btn add-btn w-100 mb-4"
+          onClick={onCheckout}
+          disabled={loading || cart.length === 0}
+        >
+          {loading ? <span className="spinner-border"></span> : <>Submit</>}
+        </button>
+        {success && (
+          <div className="w-100">
+            <p className="p-2 alert alert-success w-100">
+              Sale Created Successfully!
+            </p>
+          </div>
+        )}
       </section>
     </div>
   );

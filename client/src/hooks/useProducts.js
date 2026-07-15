@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { fetchProducts } from "../services/products.services";
-import { CATEGORIES } from "../data.js/categories";
 export const useProducts = () => {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");

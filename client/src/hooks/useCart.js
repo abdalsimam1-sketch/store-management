@@ -5,6 +5,7 @@ export const useCart = () => {
     const saved = localStorage.getItem("cart");
     return saved ? JSON.parse(saved) : [];
   });
+
   const increase = (product) => {
     const exists = cart.find((item) => item.id === product.id);
     if (exists) {

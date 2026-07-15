@@ -3,6 +3,7 @@ import { CATEGORIES } from "../../data.js/categories";
 import { useProducts } from "../../hooks/useProducts";
 import { useCart } from "../../hooks/useCart";
 import { Cart } from "../../components/cashier/Cart";
+import { createSale } from "../../services/sales.services";
 
 export const Checkout = () => {
   const {
@@ -25,6 +26,32 @@ export const Checkout = () => {
   };
 
   const { increase, decrease, cart, setCart, clearCart, remove } = useCart();
+  const [saleLoading, setSaleLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+
+  const saleItems = cart.map((item) => ({
+    productId: item.id,
+    quantity: item.quantity,
+  }));
+
+  const handleCreateSale = async () => {
+    try {
+      setSuccess(false);
+      setSaleLoading(true);
+      await createSale({ items: saleItems });
+      setSuccess(true);
+      setTimeout(() => {
+        setModalOpen(false);
+        setSuccess(false);
+      }, 1500);
+      await getProducts();
+      clearCart();
+    } catch (error) {
+      setError(error.response?.data?.message);
+    } finally {
+      setSaleLoading(false);
+    }
+  };
 
   useEffect(() => {
     getProducts();
@@ -52,6 +79,9 @@ export const Checkout = () => {
                 decrease={decrease}
                 remove={remove}
                 clear={clearCart}
+                onCheckout={() => handleCreateSale(cart)}
+                loading={saleLoading}
+                success={success}
               ></Cart>
             </div>
           )}
