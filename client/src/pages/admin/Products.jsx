@@ -1,38 +1,31 @@
 import { useState, useEffect } from "react";
-import { fetchProducts, deleteProduct } from "../../services/products.services";
+import { deleteProduct } from "../../services/products.services";
 import { AddEditProduct } from "../../components/admin/AddEditProduct";
 import { CATEGORIES } from "../../data.js/categories";
+import { useProducts } from "../../hooks/useProducts";
 
 const Products = () => {
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [products, setProducts] = useState([]);
+  const {
+    search,
+    category,
+    setCategory,
+    loading,
+    setLoading,
+    error,
+    setError,
+    products,
+    setProducts,
+    handleSubmit,
+    getProducts,
+  } = useProducts();
+  const [deletingId, setDeletingId] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [deletingId, setDeletingId] = useState(null);
 
-  const getProducts = async () => {
-    try {
-      setError("");
-      setLoading(true);
-      const data = await fetchProducts(search, category);
-      setProducts(data.data.products);
-    } catch (error) {
-      setError(error.response?.data?.products);
-    } finally {
-      setLoading(false);
-    }
-  };
   useEffect(() => {
     getProducts();
   }, [category]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    getProducts();
-  };
   const handleDelete = async (id) => {
     if (!window.confirm("Delete this product")) {
       return;

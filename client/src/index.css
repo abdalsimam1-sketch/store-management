@@ -118,6 +118,7 @@ a.btn:hover {
   position: fixed;
   bottom: 0;
   background-color: #c2622d;
+  z-index: 1099;
 }
 a.active-mobile-nav {
   color: white;
@@ -131,6 +132,14 @@ a.active-mobile-nav {
 .actions-col {
   width: 1%;
   white-space: nowrap;
+}
+
+.cart.card {
+  width: 460px;
+  right: 0;
+  top: 3rem;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 @media (min-width: 768px) {

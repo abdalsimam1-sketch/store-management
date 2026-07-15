@@ -12,7 +12,7 @@ export const CashierLayout = () => {
         <CashierMobileNav></CashierMobileNav>
       </section>
 
-      <section className="w-100">
+      <section className="w-100 pb-5">
         <Outlet></Outlet>
       </section>
     </div>
