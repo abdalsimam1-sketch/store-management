@@ -141,6 +141,18 @@ a.active-mobile-nav {
   max-height: 80vh;
   overflow-y: auto;
 }
+.dash-table {
+  border-radius: 1rem;
+  min-height: 50vh;
+  background-color: white;
+  overflow-x: hidden;
+}
+.dash-table > table.table {
+  table-layout: fixed;
+}
+.dash-table th {
+  width: 33%;
+}
 
 @media (min-width: 768px) {
 }

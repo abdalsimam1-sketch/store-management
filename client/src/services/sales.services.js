@@ -9,3 +9,8 @@ export const createSale = async (payload) => {
   const response = await api.post("/sales", payload);
   return response.data;
 };
+
+export const fetchCashierSales = async () => {
+  const response = await api.get("sales/cashier-sales");
+  return response.data;
+};
