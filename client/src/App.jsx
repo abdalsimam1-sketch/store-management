@@ -5,12 +5,10 @@ import { CashierDashboard } from "./pages/cashier/CashierDashboard";
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import AdminLayout from "./components/admin/AdminLayout";
 import { CashierLayout } from "./components/cashier/CashierLayout";
-
 import Products from "./pages/admin/Products";
 import Cashiers from "./pages/admin/Cashiers";
 import Reports from "./pages/admin/Reports";
 import PageNotFound from "./pages/PageNotFound";
-import { Sales } from "./pages/cashier/Sales";
 import { Checkout } from "./pages/cashier/Checkout";
 
 const App = () => {
@@ -51,7 +49,6 @@ const App = () => {
             path="/cashier"
             element={<CashierDashboard></CashierDashboard>}
           ></Route>
-          <Route path="/cashier/sales" element={<Sales></Sales>}></Route>
           <Route
             path="/cashier/checkout"
             element={<Checkout></Checkout>}
