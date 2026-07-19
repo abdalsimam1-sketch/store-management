@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export const CashierMobileNav = () => {
   const { pathname } = useLocation();
+  const { signOut } = useAuth();
   const activeLink = (path) => {
     return pathname === path ? "active-mobile-nav" : "";
   };
@@ -25,6 +27,19 @@ export const CashierMobileNav = () => {
           <i className="bi-cart "></i>
           <span>Checkout</span>
         </Link>
+      </div>
+      <div>
+        <button
+          className="btn d-flex flex-column"
+          onClick={() => {
+            if (window.confirm("Are you sure you want to log out?")) {
+              signOut();
+            }
+          }}
+        >
+          <i className=" bi bi-box-arrow-right"></i>
+          <span>Logout</span>
+        </button>
       </div>
     </div>
   );
