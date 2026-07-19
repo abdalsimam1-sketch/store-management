@@ -44,7 +44,7 @@ main > div {
 }
 .admin-sidebar {
   max-width: 300px;
-  min-height: 100vh;
+  height: 100vh;
 }
 div > a {
   color: black;
