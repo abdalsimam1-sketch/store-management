@@ -93,7 +93,7 @@ export const AddEditProduct = ({ mode, product, onClose, refresh }) => {
               ))}
             </select>
           </div>
-          <section className="d-flex justify-content-between">
+          <section className="d-flex justify-content-between gap-3 gap-md-0">
             <div>
               <label htmlFor="price">Price</label>
               <input

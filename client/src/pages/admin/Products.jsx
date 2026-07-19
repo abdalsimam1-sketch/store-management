@@ -84,7 +84,7 @@ const Products = () => {
           ))}
         </select>
       </section>
-      <section className="data-table  text-nowrap">
+      <section className="data-table  table-responsive">
         <table
           className="table text-capitalize align-middle flex-grow-1"
           style={{ borderRadius: "1rem" }}
@@ -94,7 +94,7 @@ const Products = () => {
               <th>Product</th>
               <th className="d-none d-md-table-cell">Category</th>
               <th className="d-none d-md-table-cell">Price</th>
-              <th>In Stock</th>
+              <th className="d-none d-md-table-cell">In Stock</th>
               <th className="actions-col">Actions</th>
             </tr>
           </thead>
@@ -117,9 +117,9 @@ const Products = () => {
                   <td className="d-none d-md-table-cell">
                     ₦{Number(item.price).toLocaleString()}
                   </td>
-                  <td>
+                  <td className="d-none d-md-table-cell">
                     <span
-                      className={`${Number(item.stockQuantity) <= 10 ? "bg-danger-subtle text-danger" : "bg-success-subtle text-success"} border px-3 rounded-pill py-1`}
+                      className={`${Number(item.stockQuantity) <= 10 ? "bg-danger-subtle text-danger" : "bg-success-subtle text-success"} rounded-pill px-3   `}
                     >
                       {item.stockQuantity}
                     </span>
